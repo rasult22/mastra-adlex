@@ -1,13 +1,13 @@
-import { openai } from '@ai-sdk/openai';
 import { createTool } from '@mastra/core/tools';
 import { embed } from 'ai';
 import { z } from 'zod';
 import { vectorDb } from '../rag/rag';
+import { openai } from '@ai-sdk/openai';
 
-export const diezaRagTool = createTool({
-  id: 'dieza-rag',
-  description: 'Retrieve info from dieza implementing regs 2023',
-  inputSchema: z.object({
+export const namingRagTool = createTool({
+  id: 'get-naming-rag',
+  description: 'Retrieve info from company naming guidelines',
+   inputSchema: z.object({
     text: z.string().describe('Text to search for in dieza implementing regs 2023'),
   }),
   outputSchema: z.array(z.object({
@@ -24,7 +24,7 @@ export const diezaRagTool = createTool({
       model: openai.embedding("text-embedding-3-small"),
     });
     const results  = await vectorDb.query({
-      indexName: 'my_embeddings_dieza',
+      indexName: 'my_embeddings_names',
       queryVector: embedding,
       topK: 5
     })
@@ -33,4 +33,3 @@ export const diezaRagTool = createTool({
     // const  await getWeather(context.text);
   },
 });
-
