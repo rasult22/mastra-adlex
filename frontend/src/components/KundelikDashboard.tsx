@@ -1,6 +1,5 @@
 import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core';
 import { useState } from 'react';
-import './KundelikDashboard.css';
 
 interface Student {
   id: number;
@@ -158,68 +157,83 @@ function KundelikDashboard() {
   });
 
   return (
-    <div className="dashboard">
-      <header className="dashboard-header">
-        <h1>Kundelik.kz - Электронный журнал</h1>
-        <p>Используйте помощника справа для работы с журналом</p>
+    <div className="min-h-screen bg-gradient-to-br from-primary-500 to-secondary-500 p-8">
+      <header className="text-center text-white mb-12">
+        <h1 className="text-5xl font-bold mb-2">Kundelik.kz - Электронный журнал</h1>
+        <p className="text-lg opacity-90">Используйте помощника справа для работы с журналом</p>
       </header>
 
-      <div className="dashboard-content">
-        <section className="section">
-          <h2>Ученики</h2>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section className="bg-white rounded-xl p-6 shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4 pb-2 border-b-2 border-primary-500 text-gray-800">
+            Ученики
+          </h2>
           {selectedGroup ? (
-            <div className="students-list">
+            <div className="flex flex-col gap-3">
               {students.length > 0 ? (
                 students.map((student) => (
-                  <div key={student.id} className="student-card">
-                    <span className="student-name">
+                  <div
+                    key={student.id}
+                    className="p-4 bg-gray-50 rounded-lg flex justify-between items-center hover:-translate-y-0.5 hover:shadow-md transition-all"
+                  >
+                    <span className="font-semibold text-gray-800">
                       {student.lastName} {student.firstName}
                     </span>
-                    <span className="student-id">ID: {student.id}</span>
+                    <span className="text-sm text-gray-500">ID: {student.id}</span>
                   </div>
                 ))
               ) : (
-                <p className="empty-state">Список учеников пуст</p>
+                <p className="text-center py-8 text-gray-400 italic">Список учеников пуст</p>
               )}
             </div>
           ) : (
-            <p className="empty-state">
+            <p className="text-center py-8 text-gray-400 italic">
               Выберите группу через помощника
             </p>
           )}
         </section>
 
-        <section className="section">
-          <h2>Оценки</h2>
-          <div className="grades-list">
+        <section className="bg-white rounded-xl p-6 shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4 pb-2 border-b-2 border-primary-500 text-gray-800">
+            Оценки
+          </h2>
+          <div className="flex flex-col gap-3">
             {grades.length > 0 ? (
               grades.map((grade) => (
-                <div key={grade.id} className="grade-card">
-                  <span className="grade-value">{grade.value}</span>
-                  <span className="grade-date">{grade.date}</span>
+                <div
+                  key={grade.id}
+                  className="p-4 bg-gray-50 rounded-lg flex justify-between items-center hover:-translate-y-0.5 hover:shadow-md transition-all"
+                >
+                  <span className="text-2xl font-bold text-primary-500">{grade.value}</span>
+                  <span className="text-sm text-gray-500">{grade.date}</span>
                   {grade.comment && (
-                    <span className="grade-comment">{grade.comment}</span>
+                    <span className="text-sm text-gray-500 italic">{grade.comment}</span>
                   )}
                 </div>
               ))
             ) : (
-              <p className="empty-state">Оценок пока нет</p>
+              <p className="text-center py-8 text-gray-400 italic">Оценок пока нет</p>
             )}
           </div>
         </section>
 
-        <section className="section">
-          <h2>Уроки</h2>
-          <div className="lessons-list">
+        <section className="bg-white rounded-xl p-6 shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4 pb-2 border-b-2 border-primary-500 text-gray-800">
+            Уроки
+          </h2>
+          <div className="flex flex-col gap-3">
             {lessons.length > 0 ? (
               lessons.map((lesson) => (
-                <div key={lesson.id} className="lesson-card">
-                  <span className="lesson-date">{lesson.date}</span>
-                  <span className="lesson-topic">{lesson.topic || 'Без темы'}</span>
+                <div
+                  key={lesson.id}
+                  className="p-4 bg-gray-50 rounded-lg flex justify-between items-center hover:-translate-y-0.5 hover:shadow-md transition-all"
+                >
+                  <span className="font-semibold text-gray-800">{lesson.date}</span>
+                  <span className="text-gray-600">{lesson.topic || 'Без темы'}</span>
                 </div>
               ))
             ) : (
-              <p className="empty-state">Уроков пока нет</p>
+              <p className="text-center py-8 text-gray-400 italic">Уроков пока нет</p>
             )}
           </div>
         </section>
